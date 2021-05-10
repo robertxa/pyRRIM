@@ -163,7 +163,7 @@ To generate a RRIM geotif from the DEM ./Test/test.tif, that contains no data va
 >>> from pyRRIM import rrim
 >>> rrim(demname = '../Test/test.tif', nodatavalue = -9999, demfill = True, svf_n_dir = 8, svf_r_max = 20, svf_noise = 0, saturation = 80, brithness = 40, isave = True, ikeep = False)
 
-The previous line permits to build the RRIM image:
+The previous line permits to build the RRIM image with the use of the DEM located in the Test/ folder:
 
 .. image:: https://github.com/robertxa/pyRRIM/blob/main/Test/test_rrim.png
    :scale: 100 %
