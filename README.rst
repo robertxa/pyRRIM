@@ -194,10 +194,10 @@ How to cite
 -----------
 
 Please, if you use this module, cite :
-**Robert X., pyRRIM, a python RRIM Implementation (2021), Zenodo: **
+**Robert X., pyRRIM, a python RRIM Implementation (2021), DOI:10.5281/Zenodo.4745556**
 
-.. image:: https://zenodo.org/badge/81983899.svg
-   :target: https://zenodo.org/badge/latestdoi/81983899
+.. image:: https://zenodo.org/badge/365968726.svg
+   :target: https://zenodo.org/badge/latestdoi/365968726
 
 Contact
 -------
