@@ -16,6 +16,7 @@ History changes of the python module pyRRIM
 	- Check if input raster exists
 	- Check if intermediate rasters exist and use them if needed to speed up the computation
 	- Update the Reame file
+	- Zenodo doi
 	- 
 	
 	

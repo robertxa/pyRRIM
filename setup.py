@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
+#from importlib.metadata import version
 
-# Import of the lib pyswath
+# Import of the lib pyRRIM
 import pyRRIM
 
 def readme():
@@ -22,11 +23,11 @@ setup(name='pyRRIM',
 	packages=find_packages(),
 	#include_package_data=True,	# What is the use of it ?
 	install_requires=[
-	      'cv2',
+	      'opencv-python',
 	      'richdem',
 	      'numpy',
 	      'alive_progress',
-	      'osgeo gdal',
+	      'gdal',
 		  'rvt_py'
 	],
 	classifiers=[
