@@ -1,0 +1,8 @@
+include README.rst
+include To_Do.txt
+include History.txt
+include LICENCE.txt
+include /pyRRIM/
+include /Test/
+recursive-include /pyRRIM *.py
+recursive-include /Test *.png *.tif

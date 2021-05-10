@@ -1,0 +1,10 @@
+TO DO
+
+	- Write a Readme file
+    - Propose a resampling option for slope/openness?
+    - Built the function as a python module
+    - Publish on Github and Pypi
+
+BUGS FOUNDS/TO BE CORRECTED
+	- 
+	
