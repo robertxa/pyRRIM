@@ -3,6 +3,7 @@
 
 # Setuptools distribution folder.
 dist/
+build/
 
 # Test folders
 TEST/
