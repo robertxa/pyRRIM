@@ -14,18 +14,22 @@ Robert X., pyRRIM, a python RRIM Implementation, 2021; Zenodo :
 
 
 INPUTS:
-    demname (string)            : path and name of the DEM to use for RRIM process
+    demname (string)            : Path and name of the DEM to use for RRIM process
+                                  This has been tested with tif and geotiff files with succes
     nodatavalue (int, optional) : Value used to describe No Data
-                              Defaults to -9999
+                                  Defaults to -9999
     demfill (bool, optional)    : True to impose the filling of the depressions
                                   False to avoid the fill of the depressions
                                   Defaults to False
     svf_n_dir (int, optional)   : number of directions for openness
+                                  See the RVT_py documentation for more info
                                   Default to 8
     svf_r_max (int, optional)   : max search radius in pixels for openness
+                                  See the RVT_py documentation for more info
                                   Default to 10
     svf_noise (int, optional)   : level of noise remove for openness
                                   0-don't remove, 1-low, 2-med, 3-high
+                                  See the RVT_py documentation for more info
                                   Default to 0
     saturation (int, optional)  : manages the red saturation (from slope)
                                   Used to build the HSV color scale
@@ -43,11 +47,11 @@ INPUTS:
 
 OUTPUT:
     RRIM raster as a geotiff file. 
-    If the original image isgeoreferenced, the RRIM will also be georeferenced 
+    If the original image is georeferenced, the RRIM will also be georeferenced 
     in the same projection system ad geographical reference
 
 USAGE:
-    To generate a RRIM geotif from the DEM ./Test/test.tif, 
+    To generate a RRIM geotiff from the DEM ./Test/test.tif, 
     that contains no data values as -9999 and with a depression filling,
     after installation of the module, run in a python interpreter:
         >>> from pyRRIM import rrim
@@ -55,10 +59,16 @@ USAGE:
             svf_n_dir = 8, svf_r_max = 20, svf_noise = 0,
             saturation = 80, brithness = 40,
             isave = True, ikeep = False)
+    
+    If you do not install as a module, you can also, use the present file as a script file.
+    Just, copy the script file in the folder you want to work, 
+    then, modify the parameters in the function main (last function of the file),
+    and finaly run in a terminal window (where is your script file!):
+        ~$ python pytRRIM.py
 
 INSTALL:
     In the top folder, run in your terminal:
-    ~$python setup.py install
+    ~$ python setup.py install
 """
 import cv2
 import numpy as np

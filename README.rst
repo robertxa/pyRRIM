@@ -3,11 +3,30 @@ pyRRIM
 
 This code is to built Red Relief Image Maps (RRIM) from a raster (DEM). It is a python implementation of Chiba T., Kaneta S. & Suzuki Y. (2008), Red Relief Image map: New visualisation for three dimensional data, ISPRS.
 
+If the input image is a georeference image, the RRIM produced will also be georeferenced in the same system and projection.
+
 This module may contain numerous bugs, and could probably be ameliorate and/or optimized. If you have any comments, do not hesitate to add a new branch or to contact the author.
 To know the history, please check the file History.txt
 
+Run as a script file
+--------------------
+
+If you have a ponctual use of this module, you are not obliged to install it as a module. You can use the present file pyRRIM/pyRRIM.py as a script file. But you still need to unstall the depedencies of the script! (See further)
+
+	1. Just, copy the script file in the folder you want to work, 
+
+    2. then, modify the parameters in the function main (last function of the file),
+
+    3. and finaly run in a terminal window (where is your script file!):
+        
+		.. code-block:: bash
+			
+			python pytRRIM.py
+
 Install
 -------
+
+This folder has been prepared as a classic python module that you can install as usual.
 
 To install it:
 
@@ -38,7 +57,7 @@ The module has been written and tested with Python 3.9, and not tested with Pyth
 
 Dependencies
 ------------
-This code needs the following python modules and their dependencies, you may install them before the installation of the **pyRRIM** module:
+This code needs the following python modules and their dependencies, you may install them before the installation of the ** pyRRIM ** module:
 	- cv2
 	- richdem
 	- alive_progress
@@ -76,7 +95,7 @@ To use options or inputs, you need to set them as
 	
 Options/inputs are (option_names):
 
-1. demname (string): name of the raster to work with for RRIM process
+1. demname (string): name of the raster to work with for RRIM process. This has been tested with tif and geotiff files with succes.
 				
 	Add the full path to the raster. Personally, I like to store my rasters in a DEM/folder		
 					
@@ -96,19 +115,19 @@ Options/inputs are (option_names):
 
 								Default: ``demfill = False``
 
-4. svf_n_dir (int, optional): number of directions for openness: 8 is usually sufficient.
+4. svf_n_dir (int, optional): number of directions for openness: 8 is usually sufficient. See the RVT_py documentation for more info.
                                 
 								ex: ``svf_n_dir = 16``
 
 								Default: ``svf_n_dir = 8``
 
-5. svf_r_max (int, optional): max search radius in pixels for openness
+5. svf_r_max (int, optional): max search radius in pixels for openness. See the RVT_py documentation for more info.
                                 
 								Ex: ``svf_r_max = 20```
 
 								Default: ``svf_r_max = 10``
 
-6. svf_noise (int, optional): level of noise remove for openness; 0-don't remove, 1-low, 2-med, 3-high
+6. svf_noise (int, optional): level of noise remove for openness; 0-don't remove, 1-low, 2-med, 3-high. See the RVT_py documentation for more info.
 
 								ex: ``svf_noise = 2``
                                 
