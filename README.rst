@@ -166,7 +166,7 @@ To get help in your (i)python environnement:
 
 .. code-block:: python
 
-	>>> help(rrim)
+	>>> help(pyRRIM)
 
 Examples
 --------

@@ -12,15 +12,16 @@ from __future__ import print_function
 
 from pkg_resources import get_distribution
 
-__version__ = get_distribution('pyRRIMh').version
+__version__ = get_distribution('pyRRIM').version
 
 # Import modules
-import sys
-import os
+import sys, os, time
 #import copy
 import numpy as np
 import cv2
+import richdem as rd
 from osgeo import gdal
+import rvt.vis
 from alive_progress import alive_bar
 
 # Import all the functions
