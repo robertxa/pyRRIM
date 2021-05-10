@@ -64,7 +64,7 @@ USAGE:
     Just, copy the script file in the folder you want to work, 
     then, modify the parameters in the function main (last function of the file),
     and finaly run in a terminal window (where is your script file!):
-        ~$ python pytRRIM.py
+        ~$ python pyRRIM.py
 
 INSTALL:
     In the top folder, run in your terminal:

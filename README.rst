@@ -1,7 +1,7 @@
 pyRRIM
 ========
 
-This code is to built Red Relief Image Maps (RRIM) from a raster (DEM). It is a python implementation of Chiba T., Kaneta S. & Suzuki Y. (2008), Red Relief Image map: New visualisation for three dimensional data, ISPRS.
+This code is to built **Red Relief Image Maps (RRIM)** from a raster (DEM). It is a python implementation of Chiba T., Kaneta S. & Suzuki Y. (2008), Red Relief Image map: New visualisation for three dimensional data, ISPRS.
 
 If the input image is a georeference image, the RRIM produced will also be georeferenced in the same system and projection.
 
@@ -11,17 +11,17 @@ To know the history, please check the file History.txt
 Run as a script file
 --------------------
 
-If you have a ponctual use of this module, you are not obliged to install it as a module. You can use the present file pyRRIM/pyRRIM.py as a script file. But you still need to unstall the depedencies of the script! (See further)
+If you have a ponctual use of this module, you are not obliged to install it as a module. You can use the present file **pyRRIM/pyRRIM.py** as a script file. But you still need to unstall the depedencies of the script! (See further)
 
 1. Just, copy the script file in the folder you want to work, 
 
-    2. then, modify the parameters in the function main (last function of the file),
+2. then, modify the parameters in the function main (last function of the file),
 
-    3. and finaly run in a terminal window (where is your script file!):
+3. and finaly run in a terminal window (where is your script file!):
         
-		.. code-block:: bash
+	.. code-block:: bash
 			
-			python pytRRIM.py
+		python pyRRIM.py
 
 Install
 -------
@@ -53,10 +53,11 @@ If during the update you get a problem with the update of a dependency, you may 
 	pip install -U --no-deps pyRRIM
 
 
-The module has been written and tested with Python 3.9, and not tested with Python 2.7.
+The module has been written and tested with Python 3.9, but not tested with Python 2.7.
 
 Dependencies
 ------------
+
 This code needs the following python modules and their dependencies, you may install them before the installation of the **pyRRIM** module:
 	- cv2
 	- richdem
@@ -82,7 +83,6 @@ To produce a RRIM image from the raster 'Test/dem.tif' (wich contains no data va
 .. code-block:: python
 
     >>> rrim(demname = '../Test/test.tif', nodatavalue = -9999, demfill = True, svf_n_dir = 8, svf_r_max = 20, svf_noise = 0, saturation = 80, brithness = 40, isave = True, ikeep = False)
-
 
 Options/inputs
 --------------
