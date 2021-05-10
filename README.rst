@@ -13,7 +13,7 @@ Run as a script file
 
 If you have a ponctual use of this module, you are not obliged to install it as a module. You can use the present file pyRRIM/pyRRIM.py as a script file. But you still need to unstall the depedencies of the script! (See further)
 
-	1. Just, copy the script file in the folder you want to work, 
+1. Just, copy the script file in the folder you want to work, 
 
     2. then, modify the parameters in the function main (last function of the file),
 
@@ -57,7 +57,7 @@ The module has been written and tested with Python 3.9, and not tested with Pyth
 
 Dependencies
 ------------
-This code needs the following python modules and their dependencies, you may install them before the installation of the ** pyRRIM ** module:
+This code needs the following python modules and their dependencies, you may install them before the installation of the **pyRRIM** module:
 	- cv2
 	- richdem
 	- alive_progress
