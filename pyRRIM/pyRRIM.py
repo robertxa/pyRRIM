@@ -69,6 +69,9 @@ USAGE:
 INSTALL:
     In the top folder, run in your terminal:
     ~$ python setup.py install
+    
+    or use pip:
+    pip install pyRRIM
 """
 import cv2
 import numpy as np
@@ -86,7 +89,8 @@ def colorScheme(size):
     Function from Xin Yao : https://github.com/susurrant/
 
     Args:
-        size (tupple of integers): (a, b, c); a gives the saturation, b the britness
+        size (tupple of integers): (a, b, c); a gives the saturation, b the brithness
+                                   and c correspond to the number of bands of the image; this is set to 3
 
     Returns:
         RRIM_map (x * y * 3 uint8 array) : RGB array
@@ -146,7 +150,7 @@ def checkfiles(rasterfnme):
     
     Returns:
         israter (Boolean) : True if the file exists and is readable
-                            False if not
+                            False if not!
     """	
         
     israster = False
@@ -154,7 +158,6 @@ def checkfiles(rasterfnme):
     if os.path.isfile(rasterfnme) and os.access(rasterfnme, os.R_OK):
         # if raster exists
         israster = True
-        #raise NameError(u'ERROR: raster {FileNa} dem does not exist'.format(FileNa = rasterfnme))
         
     return israster
 
@@ -174,25 +177,29 @@ def genRRIMImage(slopedata, openness, color_size, output_fname):
     """
 
     # build the color map/scheme
-    #   Revise it, it is not great
     RRIM_map = colorScheme(color_size)
 
-    result = np.zeros((slopedata.shape[0], slopedata.shape[1], 3), dtype=np.uint8)
+    result = np.zeros((slopedata.shape[0], slopedata.shape[1], 3), dtype = np.uint8)
 
     # Define the progress-bar
     with alive_bar(3, title = "\x1b[32;1m- Processing RRIM final\x1b[0m", length = 35) as bar:
         # Compute the color given by the slope
         inc = np.uint8(abs(slopedata))
-        inc[inc > (color_size[0]-1)] = color_size[0]-1
+        inc[inc > (color_size[0]-1)] = color_size[0] - 1
+        # Update the progress-bar
         bar()
+
         # Compute the grey given by the openness
         #openness_val = np.uint8(openness + color_size[1] / 2)
         openness_val = np.uint8((openness + color_size[1]) / 2)
         openness_val[openness_val < 0] = 0
         openness_val[openness_val >= color_size[1]] = color_size[1] - 1
+        # Update the progress-bar
         bar()
+
         # build the RGB tuples
         result = RRIM_map[inc, openness_val]
+        # Update the progress-bar
         bar()
 
     # sav image as geotiff
@@ -209,7 +216,7 @@ def timer(func):
         """
         startTime = time.time()
         callback =  func(*args, **kw)
-        print('\nTotal running time: %.3f' % ((time.time() - startTime) / 60.0), 'mins')
+        print('\n\033[96mTotal running time:\033[00m \033[91m%.3f' % ((time.time() - startTime) / 60.0), 'mins\033[00m')
         return callback
     return wrapper
 
@@ -217,13 +224,13 @@ def timer(func):
 def factorz(DEM):
     """
     Function to compute the z factor in function of the latitude
-    Needed to compute the slope, and the openness if the DEM is in Lat Long
+    Needed to compute the slope, and the openness if the DEM is in Lat-Long
 
     Args:
         DEM (rd array): Digital Elevation Model
 
     Returns:
-        zfactor (Float): z factor
+        zfactor (Float): z factor correction
     """
 
     if 'degree' in DEM.projection and not 'PROJECTION' in DEM.projection:
@@ -258,7 +265,7 @@ def openness(DEM, slopeMat, svf_n_dir = 8, svf_noise = 0, svf_r_max = 20,
                                        Defaults to True
 
     Returns:
-        opennessMat (np array DEM.shape): Differential openness array
+        opennessMat (np array of DEM.shape): Differential openness array
     """
 
     # Define the progress-bar
@@ -286,8 +293,6 @@ def openness(DEM, slopeMat, svf_n_dir = 8, svf_noise = 0, svf_r_max = 20,
                                        #no_data = None, 
                                        fill_no_data = False, keep_original_no_data = False)
         neg_opns_arr = dict_svf["opns"] #- 90 # negative openness
-        # Invert the negative openness
-        #neg_opns_arr = abs(neg_opns_arr - 255)
         # Update the bar at each step
         bar()
 
@@ -351,29 +356,28 @@ def rrim(demname, nodatavalue = -9999, demfill = False,
     print('              RRIM computation\n')
     print('##################################################\n')
     # 1- check/build the working structure
-    # check if the raster exists
-    # Check if the output folder RRIM exists
-    # If not create it
-    # update the name of the output
-    # output file name
+    # update the name of the output file name
     rrimFile = demname[:-4]+'_rrim.tif'  # output file name
 
-    # build the color triplet used to build the HSV color scale
+    # build the color triplet used to build the HSV color scale using the saturation and brithness
     color_size=(saturation, brithness, 3)
 
     # 2- Read the DEM
     if checkfiles(demname):
+        # If the DEM exists in the declared folder, load it
         DEM = rd.LoadGDAL(demname, no_data = nodatavalue)
     else:
-        raise NameError(u'ERROR: raster %s dem does not exist' % demname)
+        # If not, insult the user...
+        raise NameError(u'\033[91mERROR:\033[00m F** input raster %s DEM does not exist' % demname)
 
-    print('Working with :')
-    print('\tDEM file  :', demname)
-    print('\tshape     :', DEM.shape)
-    print('\tz range   : %d - %d' % (np.min(np.array(DEM)), np.max(np.array(DEM))))
-    cell_size = DEM.geotransform[1] / factorz(DEM)
-    print('\tcell size :', cell_size)
-    print('\nBe patient, it could be long... Grab a beer !\n')
+    print('\x1b[32;1m- Working with :\033[00m')
+    print('\tDEM file     :', demname)
+    print('\tshape        :', DEM.shape)
+    print('\tz range      : %d - %d' % (np.min(np.array(DEM)), np.max(np.array(DEM))))
+    print('\tcell size (m):', DEM.geotransform[1] / factorz(DEM))
+    print('\tsearch radius: %s px / %s m ' % (svf_r_max, svf_r_max * DEM.geotransform[1] / factorz(DEM)))
+    
+    print('\n\033[96mBe patient, it could be long...\033[00m \033[91mGrab a beer !\033[00m\n')
 
     # 3- Process DEM (Fill depression...) with richDEM if needed
     if checkfiles(demname[:-4]+'_slope.tif') and checkfiles(demname[:-4]+'_diff_opns.tif') and ikeep:
@@ -393,7 +397,7 @@ def rrim(demname, nodatavalue = -9999, demfill = False,
 
         # 4.1 Compute slope map, using a zfactor if needed
         with alive_bar(1, title = "\x1b[32;1m- Processing Slope\x1b[0m", length = 40) as bar:
-            # Richdem slope computation
+            # Richdem slope computation if need to change
             #slopeMat = rd.TerrainAttribute(DEM, 
             #                               attrib = 'slope_degrees',
             #                               zscale = factorz(DEM))

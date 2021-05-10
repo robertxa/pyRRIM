@@ -8,13 +8,14 @@ History changes of the python module pyRRIM
 	- Using slope computation from richdem (more accurate/efficient)
 	- Add computation of the zfactor for lat-long DEMs
 
-1.0.0: 2021/05/05 
+1.0.0: 2021/05/10
 	- Implementation of rvt-py --> 10x faster
 	- Save intermediate rasters as geotiffs
 	- Speed up the RRIM building --> >100x faster...
 	- Update ColorSheme --> OK?
 	- Check if input raster exists
-	- Check if intermediate rasters exists and use it if needed to speed the computation
+	- Check if intermediate rasters exist and use them if needed to speed up the computation
+	- Update the Reame file
 	- 
 	
 	
