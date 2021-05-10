@@ -2,7 +2,6 @@ TO DO
 
     - Propose a resampling option for slope/openness?
     - Remove Richdem? Maybe not because this is used for depression filling option
-    - Publish on Pypi
     - 
 
 BUGS FOUNDS/TO BE CORRECTED
