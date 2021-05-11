@@ -292,7 +292,10 @@ def openness(DEM, slopeMat, svf_n_dir = 8, svf_noise = 0, svf_r_max = 20,
                                        no_data = nodatavalue,
                                        #no_data = None, 
                                        fill_no_data = False, keep_original_no_data = False)
-        neg_opns_arr = dict_svf["opns"] #- 90 # negative openness
+        neg_opns_arr = dict_svf["opns"] # negative openness
+        # Invert negative openness as proposed by Chiba et al.?
+        # How to do it?
+
         # Update the bar at each step
         bar()
 

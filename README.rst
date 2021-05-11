@@ -9,7 +9,7 @@ This module is rapid, but may contain numerous ``bugs``, and could probably be a
 
 To know the ``history``, please check the file History.txt
 
-If you use this module, please, cite it (see the section ``How to cite``).
+If you use this module, please, **cite it** (see the section ``How to cite``).
 
 Run as a script file
 --------------------

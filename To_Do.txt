@@ -2,6 +2,7 @@ TO DO
 
     - Propose a resampling option for slope/openness?
     - Remove Richdem? Maybe not because this is used for depression filling option
+    - Do we need to invert the negative openness? For the moment, this is not inverted
     - 
 
 BUGS FOUNDS/TO BE CORRECTED
