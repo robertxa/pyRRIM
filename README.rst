@@ -102,65 +102,65 @@ Options/inputs are (option_names):
 
 1. ``demname`` (string): name of the raster to work with for RRIM process. This has been tested with tif and geotiff files with succes.
 				
-	Add the full path to the raster. Personally, I like to store my rasters in a DEM/folder		
+Add the full path to the raster. Personally, I like to store my rasters in a DEM/folder		
 					
-	ex: ``rasterfnme = 'Dem/Dem_Fusion-Peru_projUTM.tif'``
+ex: ``rasterfnme = 'Dem/Dem_Fusion-Peru_projUTM.tif'``
 					
-	Default = ``None``
+Default = ``None``
 	
 2. ``nodatavalue`` (int, optional): Value used to describe No Data in the input raster
 
-				ex: ``nodatavalue = -9999``
+ex: ``nodatavalue = -9999``
 
-				Default: ``nodatavalue = -9999``
+Default: ``nodatavalue = -9999``
 
 3. ``demfill`` (bool, optional): True to impose the filling of the depressions, False to avoid the fill of the depressions
                                 
-								ex:  ``demfill = True``
+ex:  ``demfill = True``
 
-								Default: ``demfill = False``
+Default: ``demfill = False``
 
 4. ``svf_n_dir`` (int, optional): number of directions for openness: 8 is usually sufficient. See the RVT_py documentation for more info.
                                 
-								ex: ``svf_n_dir = 16``
+ex: ``svf_n_dir = 16``
 
-								Default: ``svf_n_dir = 8``
+Default: ``svf_n_dir = 8``
 
 5. ``svf_r_max`` (int, optional): max search radius in pixels for openness. See the RVT_py documentation for more info.
                                 
-								Ex: ``svf_r_max = 20```
+Ex: ``svf_r_max = 20```
 
-								Default: ``svf_r_max = 10``
+Default: ``svf_r_max = 10``
 
 6. ``svf_noise`` (int, optional): level of noise remove for openness; 0-don't remove, 1-low, 2-med, 3-high. See the RVT_py documentation for more info.
 
-								ex: ``svf_noise = 2``
+ex: ``svf_noise = 2``
                                 
-								Default: ``svf_noise = 0``
+Default: ``svf_noise = 0``
 
 7. ``saturation`` (int, optional): manages the red saturation (from slope). This is used to build the HSV color scale. You may need to play with this value to get a correct colorized RRIM.
                                 
-								Ex: ``saturation = 50``
+Ex: ``saturation = 50``
 
-								Default: ``saturation = 90``
+Default: ``saturation = 90``
 
 8. ``brithness`` (int, optional): manages the brithness (from diff. openness). This is used to build the HSV color scale. You may need to play with this value to get a correct exposed RRIM.
                                 
-								Ex: ``brithness = 90``
+Ex: ``brithness = 90``
 
-								Default: ``brithness = 150``
+Default: ``brithness = 150``
 
 9. ``isave`` (bool, optional): True to save temporary rasters (slope, openness,...), or False to avoid saving temporary rasters
                             	
-								Ex: ``isave = False``
+Ex: ``isave = False``
 								
-								Default: ``isave = True``
+Default: ``isave = True``
 
 10. ``ikeep`` (bool, optional): True to use existing slope and openness rasters, or False to recompute slope and openness rasters. This is usefull when we just play with colors parameters!
                                 
-								Ex: ``ikeep = True``
+Ex: ``ikeep = True``
 								
-								Default: ``ikeep = False``
+Default: ``ikeep = False``
 
 Help files
 ----------
