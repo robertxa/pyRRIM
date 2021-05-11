@@ -61,11 +61,11 @@ Dependencies
 ------------
 
 This code needs the following python modules and their dependencies, you may install them before the installation of the **pyRRIM** module:
-	- cv2
+	- opencv-python (cv2)
 	- richdem
 	- alive_progress
 	- numpy
-	- osgeo/gdal
+	- gdal
 	- time
 	- rvt_py
 
