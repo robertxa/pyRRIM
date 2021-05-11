@@ -102,7 +102,7 @@ Options/inputs are (option_names):
 
 1. ``demname`` (string): name of the raster to work with for RRIM process. This has been tested with tif and geotiff files with succes.
 				
-Add the full path to the raster. Personally, I like to store my rasters in a DEM/folder		
+	Add the full path to the raster. Personally, I like to store my rasters in a DEM/folder		
 					
 	ex: ``rasterfnme = 'Dem/Dem_Fusion-Peru_projUTM.tif'``
 					
