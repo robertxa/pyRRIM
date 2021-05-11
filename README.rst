@@ -9,6 +9,8 @@ This module is rapid, but may contain numerous ``bugs``, and could probably be a
 
 To know the ``history``, please check the file History.txt
 
+If you use this module, please, cite it (see the section ``How to cite``).
+
 Run as a script file
 --------------------
 
@@ -194,7 +196,7 @@ How to cite
 -----------
 
 Please, if you use this module, cite :
-``Robert X., pyRRIM, a python RRIM Implementation (2021), DOI:10.5281/Zenodo.4745556``
+``Robert X., pyRRIM, a python Red Relief Image Maps (RRIM) Implementation (2021), DOI:10.5281/Zenodo.4745556``
 
 .. image:: https://zenodo.org/badge/DOI/10.5281/zenodo.4745556.svg
    :target: https://doi.org/10.5281/zenodo.4745556
