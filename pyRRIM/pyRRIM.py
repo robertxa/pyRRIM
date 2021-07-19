@@ -193,6 +193,7 @@ def genRRIMImage(slopedata, openness, color_size, output_fname):
         #openness_val = np.uint8(openness + color_size[1] / 2)
         openness_val = np.uint8((openness + color_size[1]) / 2)
         openness_val[openness_val < 0] = 0
+        #openness_val[openness_val < 0] = 
         openness_val[openness_val >= color_size[1]] = color_size[1] - 1
         # Update the progress-bar
         bar()
@@ -295,12 +296,17 @@ def openness(DEM, slopeMat, svf_n_dir = 8, svf_noise = 0, svf_r_max = 20,
         neg_opns_arr = dict_svf["opns"] # negative openness
         # Invert negative openness as proposed by Chiba et al.?
         # How to do it?
+        #neg_opns_arr = (1 - neg_opns_arr / neg_opns_arr.max()) * neg_opns_arr.max()
+        #neg_opns_arr = neg_opns_arr - 360
 
         # Update the bar at each step
         bar()
 
         # Compute the differential openness
         opennessMat = (pos_opns_arr - neg_opns_arr) / 2
+        #opennessMat = (-neg_opns_arr)
+
+        #print(opennessMat.min(), opennessMat.max())
 
         # Update the bar at each step
         bar()
@@ -310,7 +316,11 @@ def openness(DEM, slopeMat, svf_n_dir = 8, svf_noise = 0, svf_r_max = 20,
         saveImage(demname[:-4]+'_neg_opns.tif', neg_opns_arr, slopeMat)
         saveImage(demname[:-4]+'_diff_opns.tif', opennessMat, slopeMat)
 
-        return opennessMat
+    # Flush the pos and neg oppenness array
+    pos_opns_arr = None
+    neg_opns_arr = None
+
+    return opennessMat
 
 
 ####################################################
@@ -371,14 +381,18 @@ def rrim(demname, nodatavalue = -9999, demfill = False,
         DEM = rd.LoadGDAL(demname, no_data = nodatavalue)
     else:
         # If not, insult the user...
-        raise NameError(u'\033[91mERROR:\033[00m F** input raster %s DEM does not exist' % demname)
+        raise NameError(u'\033[91mERROR:\033[00m F** input DEM %s does not exist' % demname)
 
     print('\x1b[32;1m- Working with :\033[00m')
-    print('\tDEM file     :', demname)
-    print('\tshape        :', DEM.shape)
-    print('\tz range      : %d - %d' % (np.min(np.array(DEM)), np.max(np.array(DEM))))
-    print('\tcell size (m):', DEM.geotransform[1] / factorz(DEM))
-    print('\tsearch radius: %s px / %s m ' % (svf_r_max, svf_r_max * DEM.geotransform[1] / factorz(DEM)))
+    print('\tDEM file      :', demname)
+    print('\tshape (nx, ny):', DEM.shape)
+    if nodatavalue <= 0:
+        print('\tz range       : %d - %d' % (max(nodatavalue, np.min(np.array(DEM[DEM > nodatavalue]))), np.max(np.array(DEM))))
+    else:
+        print('\tz range       : %d - %d' % (np.min(np.array(DEM)), min(nodatavalue, np.max(np.array(DEM[DEM < nodatavalue])))))
+    print('\tcell size (m) :', DEM.geotransform[1] / factorz(DEM))
+    print('\tNo Data Value :', nodatavalue)
+    print('\tsearch radius : %s px / %s m ' % (svf_r_max, svf_r_max * DEM.geotransform[1] / factorz(DEM)))
     
     print('\n\033[96mBe patient, it could be long...\033[00m \033[91mGrab a beer !\033[00m\n')
 
@@ -388,7 +402,7 @@ def rrim(demname, nodatavalue = -9999, demfill = False,
         slopeMat = rd.LoadGDAL(demname[:-4]+'_slope.tif', no_data = nodatavalue)
         opennessMat = rd.LoadGDAL(demname[:-4]+'_diff_opns.tif', no_data = nodatavalue)
         # 4- Prosses the RRIM
-        print('\nstart rrim...\n')
+        print('\n033[96mstart rrim...\033[00m\n')
     else:
         if demfill:
             print('\x1b[32;1m- Filling Depressions...\x1b[0m')
@@ -396,7 +410,7 @@ def rrim(demname, nodatavalue = -9999, demfill = False,
         else:
             print('\x1b[32;1mNO Fill Depressions\x1b[0m')
         # 4- Prosses the RRIM
-        print('\nstart rrim...\n')
+        print('\n\033[96mstart rrim...\033[00m\n')
 
         # 4.1 Compute slope map, using a zfactor if needed
         with alive_bar(1, title = "\x1b[32;1m- Processing Slope\x1b[0m", length = 40) as bar:
@@ -425,11 +439,18 @@ def rrim(demname, nodatavalue = -9999, demfill = False,
         # If the calculated raster looks very pixelized, we might resample the grey value matrix 
         # with a bilinear or cubic method
         # TO DO
+    
+    # Flush the DEM
+    DEM = None
 
     # 4.3 img generation step
     genRRIMImage(slopeMat, opennessMat, color_size, rrimFile)
 
-    print('\nrrim complete.')
+    # Flush Slope and Openness
+    SlopeMat = None
+    opennessMat = None
+
+    print('\n\033[91mrrim complete!\033[00m')
 
     return
 
@@ -438,15 +459,25 @@ if __name__ == '__main__':
     
     # Define parameters
     demname = '../Test/test.tif'
+    # some classic No Data values
     nodatavalue = -9999
+    #nodatavalue = -3.40282e+38
+    #nodatavalue = 32767
     demfill = True
     isave = True
-    ikeep = False
+    #ikeep = False
+    ikeep = True
+    
+    # These parameters are OK for Pleiades DEMs
     #color_size=(90, 50, 3) # Slightly red
     #color_size=(60, 50, 3) # Quite red
-    saturation = 80
-    brithness = 40
+    #saturation = 80
+    #brithness = 40
 
+    # These parameters are OK for an ASTER 30 m GDEM
+    saturation = 75
+    brithness = 400
+    
     # Set the parameters for raster computations
     svf_n_dir = 8  # number of directions (for openness)
     svf_r_max = 20  # max search radius in pixels (for openness)

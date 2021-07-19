@@ -20,5 +20,10 @@ History changes of the python module pyRRIM
 	- Pypi release
 	- 
 	
+1.0.1: 202?/??/??
+	- fix small bugs and colors
+	- Flush the rasters arrays when not in use anymore to limit RAM consumption
+	- 
+	
 	
 		
