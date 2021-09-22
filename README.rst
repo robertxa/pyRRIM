@@ -179,7 +179,7 @@ To generate a RRIM geotif from the DEM ./Test/test.tif, that contains no data va
 .. code-block:: python
 
 >>> from pyRRIM import rrim
->>> rrim(demname = '../Test/test.tif', nodatavalue = -9999, demfill = True, 
+>>> rrim(demname = '../Test/test.tif', nodatavalue = -9999, demfill = True,
          svf_n_dir = 8, svf_r_max = 20, svf_noise = 0,
 	     saturation = 80, brithness = 40,
 	     isave = True, ikeep = False)
