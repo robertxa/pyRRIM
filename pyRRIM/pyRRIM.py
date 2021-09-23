@@ -402,7 +402,7 @@ def rrim(demname, nodatavalue = -9999, demfill = False,
         slopeMat = rd.LoadGDAL(demname[:-4]+'_slope.tif', no_data = nodatavalue)
         opennessMat = rd.LoadGDAL(demname[:-4]+'_diff_opns.tif', no_data = nodatavalue)
         # 4- Prosses the RRIM
-        print('\n033[96mstart rrim...\033[00m\n')
+        print('\n\033[96mstart rrim...\033[00m\n')
     else:
         if demfill:
             print('\x1b[32;1m- Filling Depressions...\x1b[0m')
