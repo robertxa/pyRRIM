@@ -117,7 +117,7 @@ def saveImage(output_fname, result, raster):
     Function to save an array to a geotiff file
 
     Args:
-        output_fname (string)                   : Name of the new raster yo write in geotiff format
+        output_fname (string)                   : Name of the new raster to write in geotiff format
         result (array of uint8, 3 bands)        : Array of 3 bands uint8 
                                                   (values from 0 to 255, for RGB coding)
         raster (GDAL/richDEM-type raster object): Raster that have been used to generate the new raster
@@ -131,7 +131,7 @@ def saveImage(output_fname, result, raster):
     print('\tWritting %s...' % output_fname)
 
     # Transform tiff image to geotiff image with the same geo-data than the original and slope rasters
-    out=gdal.Open(output_fname, gdal.GA_Update)
+    out = gdal.Open(output_fname, gdal.GA_Update)
     out.SetGeoTransform(raster.geotransform)
     out.SetProjection(raster.projection)
     out = None 
